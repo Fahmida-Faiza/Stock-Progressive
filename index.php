@@ -15,70 +15,66 @@ $pages = [
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Company Stock Manager</title>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-<!-- Tailwind CSS & DaisyUI CDN -->
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.50.0/dist/full.css" rel="stylesheet">
 
-<style>
-/* CSS Grid with 3 columns */
-.grid-3col {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-/* Responsive breakpoints */
-@media (max-width: 1024px) {
-    .grid-3col {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media (max-width: 640px) {
-    .grid-3col {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Add border to cards */
-.card-border {
-    border: 1px solid #d1d5db; /* Tailwind gray-300 */
-}
-</style>
 </head>
-<body class="bg-white">
+
+<body class="min-h-screen bg-gradient-to-b from-slate-100 to-white">
 
 <!-- Header -->
-<header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md py-6">
-    <div class="container mx-auto text-center">
-        <h1 class="text-4xl font-bold">Company Stock Manager</h1>
+
+
+<!-- Navbar -->
+<div class="navbar bg-white shadow-md rounded-lg container mx-auto mb-6 px-4 py-2 border border-gray-100">
+    <div class="flex-1">
+        <a href="index.php" class="btn btn-ghost text-xl font-semibold text-indigo-600">Stock Manager</a>
+    </div>
+    <div class="flex gap-2">
+        <a href="index.php" class="btn btn-outline btn-primary">🏠 Home</a>
+        <a href="login.php" class="btn btn-primary">Login</a>
+    </div>
+</div>
+
+
+
+<header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg py-8 mb-4">
+    <div class="text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-wide">📦 Company Stock Manager</h1>
+        <p class="text-lg opacity-80 mt-1">Manage Books, Payments & Deliveries With Ease</p>
     </div>
 </header>
 
-<!-- Cards Grid -->
-<section class="py-12">
-    <div class="container mx-auto px-4 grid-3col justify-items-center">
+
+
+
+
+<!-- Cards Section -->
+<div class="container mx-auto px-4 pb-20">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <?php foreach($pages as $page): ?>
-        <div class="card card-border w-96 bg-base-100 card-xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300" onclick="location.href='<?= $page['link'] ?>'">
+        <div 
+          onclick="location.href='<?= $page['link'] ?>'" 
+          class="card bg-white shadow-xl border border-gray-200 hover:shadow-2xl hover:-translate-y-1 transition-all cursor-pointer rounded-2xl"
+        >
             <div class="card-body">
-                <h2 class="card-title"><?= $page['title'] ?></h2>
-                <p><?= $page['desc'] ?></p>
-                <div class="justify-end card-actions mt-4">
-                    <button class="btn btn-<?= $page['color'] ?> w-full">Go</button>
+                <h2 class="card-title text-lg font-extrabold text-slate-700"><?= $page['title'] ?></h2>
+                <p class="text-sm text-gray-500"><?= $page['desc'] ?></p>
+                <div class="mt-4">
+                    <button class="btn btn-<?= $page['color'] ?> w-full rounded-xl">Open</button>
                 </div>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
-</section>
+</div>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-6 mt-12">
-    <div class="container mx-auto text-center">
-        <p>© 2025 BitBinaryIt. All rights reserved.</p>
-    </div>
+<footer class="bg-slate-900 text-white py-5 mt-10 text-center text-sm">
+    © 2025 BitBinaryIt — All Rights Reserved
 </footer>
 
 </body>

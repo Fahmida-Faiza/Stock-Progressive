@@ -226,46 +226,46 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
-    <div class="hidden md:block overflow-x-auto shadow-lg rounded-lg border">
-      <table  id="myTable"  class="table table-compact w-full">
-        <thead class="bg-blue-100 text-black">
-          <tr>
-            <th>SNo</th>
-            <th>Date</th>
-            <th>Company Name</th>
-           
-            <th> Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-
+<!-- Responsive Table Wrapper -->
+<div class="overflow-x-auto w-full shadow-lg rounded-lg border">
+  <table id="myTable" class="table table-compact w-full min-w-[600px]">
+    <thead class="bg-blue-100 text-black">
+      <tr>
+        <th>SNo</th>
+        <th>Date</th>
+        <th>Company Name</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
       <?php
-$sql = "SELECT * FROM `book`";
-$result = mysqli_query($conn, $sql);
-$sno = 0;
-while($row = mysqli_fetch_assoc($result)){
-  $sno= $sno + 1;
-  echo "<tr>
-    <th scope='row'>" .$sno ."</th>
-    <td>" . $row['date'] . "</td>    
-    <td>" . $row['company'] . "</td>
- 
-    <td>" . $row['price'] . "</td>
-    <td>
-      <button class='btn btn-primary'><a class='edit' href='dhaka_receive_edit.php?id=".$row['sno']."'>Edit</a></button>
-      <button class='btn btn-error delete' id='d".$row['sno']."'>Delete</button>
-    </td>
-  </tr>";
-}
-?>
+      $sql = "SELECT * FROM `book`";
+      $result = mysqli_query($conn, $sql);
+      $sno = 0;
+      while($row = mysqli_fetch_assoc($result)){
+        $sno= $sno + 1;
+        echo "<tr>
+          <th scope='row'>" .$sno ."</th>
+          <td>" . $row['date'] . "</td>    
+          <td>" . $row['company'] . "</td>
+          <td>" . $row['price'] . "</td>
+          <td>
+            <button class='btn btn-primary'><a class='edit' href='dhaka_receive_edit.php?id=".$row['sno']."'>Edit</a></button>
+            <button class='btn btn-error delete' id='d".$row['sno']."'>Delete</button>
+          </td>
+        </tr>";
+      }
+      ?>
+    </tbody>
+  </table>
+</div>
 
-        </tbody>
-      </table>
-
-      <script>
+<!-- Optional: DataTable JS initialization -->
+<script>
   let table = new DataTable('#myTable');
 </script>
+
 
 <script>
   // Edit buttons (existing)
