@@ -10,7 +10,7 @@ if (!$conn){
 }
 
 $sno = $_GET['id'];
-$sql = "SELECT * FROM book_records WHERE sno = $sno";
+$sql = "SELECT * FROM book_send WHERE sno = $sno";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -44,7 +44,7 @@ $dateValue = date('Y-m-d', strtotime($row['date']));
   <div class="bg-white shadow-2xl rounded-3xl p-6 md:p-10 w-full max-w-4xl mx-auto">
     <h1 class="text-2xl md:text-3xl font-bold text-indigo-600 mb-6 text-center">Edit Product</h1>
 
-    <form method="POST" action="/Stock%20Progressive/dhaka_receive.php" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form method="POST" action="/Stock%20Progressive/rangpur_dhaka.php?" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
       <input type="hidden" name="snoEdit" id="snoEdit" value="<?php echo $sno; ?>">
 

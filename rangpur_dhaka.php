@@ -13,10 +13,10 @@ if (!$conn){
 // MUST BE BEFORE HTML OUTPUT
 if(isset($_GET['delete'])){
   $sno= $_GET['delete'];
-  $sql= "DELETE FROM `book_records` WHERE `sno`= $sno";
+  $sql= "DELETE FROM `book_send` WHERE `sno`= $sno";
   $result = mysqli_query($conn, $sql);
   // Redirect without alert
-  header("Location: dhaka_receive.php");
+  header("Location: rangpur_dhaka.php");
   exit();
 }
 
@@ -24,7 +24,7 @@ if(isset($_GET['delete'])){
 $editMode = false;
 if(isset($_GET['id'])){
     $sno = $_GET['id'];
-    $sql = "SELECT * FROM book_records WHERE sno = $sno";
+    $sql = "SELECT * FROM book_send WHERE sno = $sno";
     $result = mysqli_query($conn, $sql);
     if($row = mysqli_fetch_assoc($result)){
         $editMode = true;
@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $company= $_POST["companyEdit"];
         $price= $_POST["priceEdit"];
 
-        $sql ="UPDATE `book_records` SET `date` = '$date', `company` = '$company', `price`= '$price' WHERE `book_records`.`sno` = $sno";
+        $sql ="UPDATE `book_send` SET `date` = '$date', `company` = '$company', `price`= '$price' WHERE `book_send`.`sno` = $sno";
         $result = mysqli_query($conn, $sql);
 
         if($result){
@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $quantity= $_POST["quantity"];
         $price= $_POST["price"];
 
-        $sql ="INSERT INTO `book_records` (`date`,`price`, `company`, `book`, `mobile`, `quantity`) VALUES ('$date', '$price', '$company', '$book', '$mobile',  '$quantity')";
+        $sql ="INSERT INTO `book_send` (`date`,`price`, `company`, `book`, `mobile`, `quantity`) VALUES ('$date', '$price', '$company', '$book', '$mobile',  '$quantity')";
         $result = mysqli_query($conn, $sql);
 
         if($result){
@@ -221,7 +221,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     </thead>
     <tbody>
       <?php
-      $sql = "SELECT * FROM `book_records`";
+      $sql = "SELECT * FROM `book_send`";
       $result = mysqli_query($conn, $sql);
       $sno = 0;
       while($row = mysqli_fetch_assoc($result)){
@@ -232,7 +232,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
           <td>" . $row['company'] . "</td>
           <td>" . $row['price'] . "</td>
           <td>
-            <button class='btn btn-primary'><a class='edit' href='dhaka_receive_edit.php?id=".$row['sno']."'>Edit</a></button>
+            <button class='btn btn-primary'><a class='edit' href='rangpur_dhaka_edit.php?id=".$row['sno']."'>Edit</a></button>
             <button class='btn btn-error delete' id='d".$row['sno']."'>Delete</button>
           </td>
         </tr>";
@@ -279,7 +279,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
       if(e.target && e.target.classList.contains('delete')){
           let sno = e.target.id.slice(1); // remove 'd' prefix
           if(confirm("Are you sure you want to delete this?")){
-              window.location = `/Stock%20Progressive/dhaka_receive.php?delete=${sno}`;
+              window.location = `/Stock%20Progressive/rangpur_dhaka.php?delete=${sno}`;
           }
       }
   });
