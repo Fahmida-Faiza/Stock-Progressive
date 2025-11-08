@@ -1,4 +1,27 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit;
+}
+
+
+if(isset($_GET['logout'])) {
+    // Unset all session variables
+    $_SESSION = array();
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page
+    header("Location: login.php");
+    exit;
+}
+
+
+?>
+
+<?php
 $pages = [
     ["title" => "Receive Form Dhaka", "desc" => "Record all Dhaka deliveries efficiently.", "link" => "dhaka_receive.php", "color" => "primary"],
     ["title" => "Rangpur to Dhaka", "desc" => "Track shipments from Rangpur to Dhaka.", "link" => "rangpur_dhaka.php", "color" => "secondary"],
@@ -33,9 +56,21 @@ $pages = [
     <div class="flex-1">
         <a href="index.php" class="btn btn-ghost text-xl font-semibold text-indigo-600">Stock Manager</a>
     </div>
-    <div class="flex gap-2">
+  <div class="flex gap-2">
         <a href="index.php" class="btn btn-outline btn-primary">🏠 Home</a>
-        <a href="login.php" class="btn btn-primary">Login</a>
+        
+        <?php 
+        // Check if the user is logged in using the user_id session variable
+        if (isset($_SESSION['user_id'])) { 
+        ?>
+            <a href="logout.php" class="btn btn-error">🚪 Logout</a>
+        <?php 
+        } else { 
+        ?>
+            <a href="login.php" class="btn btn-primary">Login</a>
+        <?php 
+        } 
+        ?>
     </div>
 </div>
 

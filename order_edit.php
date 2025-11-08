@@ -9,6 +9,14 @@ if (!$conn){
   die("sorry" . mysqli_connect_error());
 }
 
+
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit;
+}
+
+
 $sno = $_GET['id'];
 $sql = "SELECT * FROM book_order WHERE sno = $sno";
 $result = mysqli_query($conn, $sql);

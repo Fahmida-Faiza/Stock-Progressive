@@ -9,6 +9,13 @@ if (!$conn){
   die("Connection failed: " . mysqli_connect_error());
 }
 
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit;
+}
+
+
 // ====== DELETE LOGIC ======
 // MUST BE BEFORE HTML OUTPUT
 if(isset($_GET['delete'])){
@@ -97,7 +104,18 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
   </div>
   <div class="flex-none gap-2 flex items-center">
     <button onclick="location.href='index.php'" class="btn btn-outline btn-white rounded-full hover:bg-white hover:text-indigo-600 transition">🏠 Home</button>
-    <button onclick="location.href='login.php'" class="btn btn-outline btn-white rounded-full hover:bg-white hover:text-indigo-600 transition">Login</button>
+    <?php 
+        // Check if the user is logged in using the user_id session variable
+        if (isset($_SESSION['user_id'])) { 
+        ?>
+            <a href="logout.php" class="btn btn-error">🚪 Logout</a>
+        <?php 
+        } else { 
+        ?>
+            <a href="login.php" class="btn btn-primary">Login</a>
+        <?php 
+        } 
+        ?>
   </div>
 </div>
 

@@ -9,6 +9,13 @@ if (!$conn){
   die("sorry" . mysqli_connect_error());
 }
 
+
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit;
+}
+
 $sno = $_GET['id'];
 $sql = "SELECT * FROM book_records WHERE sno = $sno";
 $result = mysqli_query($conn, $sql);
@@ -16,6 +23,7 @@ $row = mysqli_fetch_assoc($result);
 
 // Convert full datetime to YYYY-MM-DD for the date input
 $dateValue = date('Y-m-d', strtotime($row['date']));
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
